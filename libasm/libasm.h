@@ -1,5 +1,5 @@
 #ifndef _LIBASM_H_
-#define _LIBASM_H
+#define _LIBASM_H_
 
 #include <stdlib.h>
 #include <assert.h>

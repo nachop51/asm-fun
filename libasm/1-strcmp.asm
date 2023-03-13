@@ -9,29 +9,52 @@ asm_strcmp:
   push rbp
   mov rbp, rsp
 
-    mov rsi, [rbp+16]   ; Load the address of the first string
-    mov rdi, [rbp+24]   ; Load the address of the second string
+  push r8 ; push register in case they were used before
+  push r9 ; same thing
 
   strcmp:
-    mov al, [esi] ; Load the character from the first string into al
-    mov bl, [edi] ; Load the character from the second string into bl
-    cmp al, bl
-    je end
+    mov r8b, [rsi] ; load a string into r8 register, and use the low bites
+    mov r9b, [rdi] ; same thing here
 
-    cmp al, 0h
-    je end
+    cmp r8b, 0h ; check if string ended
+    je str_ended
 
-    cmp bl, 0h
-    je end
+    cmp r9b, 0h ; check if string ended
+    je gret
 
-    inc rsi
-    inc rdi
+    cmp r8b, r9b ; check if there is any difference
+    jne compare
+
+    inc rsi ; in case that the chars are equal,
+    inc rdi ; increment both registers to continue
     jmp strcmp
+
+  str_ended:
+    cmp r9b, 0h ; if the first ended, check the second
+    je equal    ; if the second ended, the strings are equal
+    jmp gret    ; any other case is greater than
+
+  equal:
+    mov rax, 0  ; put 0 on the rax register
+    jmp end     ; return
+
+  compare:
+    cmp r8b, r9b
+    jg lest
+    jmp gret
+
+  gret:
+    mov rax, 1
+    jmp end
+
+  lest:
+    mov rax, -1
+    jmp end
 
   end:
 
-    xor rax, rax
-    sub eax, ebx
+    pop r9 ; clean the registers before leaving
+    pop r8 ; important!! in order
 
     ; function epilogue
     mov rsp, rbp

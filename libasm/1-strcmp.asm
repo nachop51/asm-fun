@@ -32,7 +32,7 @@ asm_strcmp:
   str_ended:
     cmp r9b, 0h ; if the first ended, check the second
     je equal    ; if the second ended, the strings are equal
-    jmp gret    ; any other case is less than
+    jmp lest    ; any other case is less than
 
   equal:
     mov rax, 0  ; put 0 on the rax register

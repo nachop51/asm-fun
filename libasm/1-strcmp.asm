@@ -13,8 +13,8 @@ asm_strcmp:
   push r9 ; same thing
 
   strcmp:
-    mov r8b, [rsi] ; load a string into r8 register, and use the low bites
-    mov r9b, [rdi] ; same thing here
+    mov r8b, byte [rdi] ; load a string into r8 register, and use the low bites
+    mov r9b, byte [rsi] ; same thing here
 
     cmp r8b, 0h ; check if string ended
     je str_ended
@@ -32,7 +32,7 @@ asm_strcmp:
   str_ended:
     cmp r9b, 0h ; if the first ended, check the second
     je equal    ; if the second ended, the strings are equal
-    jmp gret    ; any other case is greater than
+    jmp gret    ; any other case is less than
 
   equal:
     mov rax, 0  ; put 0 on the rax register
@@ -40,8 +40,8 @@ asm_strcmp:
 
   compare:
     cmp r8b, r9b
-    jg lest
-    jmp gret
+    jg gret
+    jmp lest
 
   gret:
     mov rax, 1

@@ -27,7 +27,7 @@ asm_strstr:
     cmp rsi, 0
     je not_found
     cmp byte [rsi], 0h
-    je not_found
+    je found
 
 
   strstr:
@@ -48,16 +48,16 @@ asm_strstr:
     jmp strstr               ; if it is not the end continue
 
   match:
-    cmp byte [rsi + r9 + 1], 0h
-    je found
+    cmp byte [rsi + r9 + 1], 0h ; needle ended?
+    je found                    ; then return the position
 
-    inc r8
-    inc r9
+    inc r8    ; increase both registers
+    inc r9    ;
 
-    mov al, byte [rdi + r8]
-    cmp al, byte [rsi + r9]
-    je match
-    jmp not_match
+    mov al, byte [rdi + r8]     ; move rdi + r8 to al (rax low bites)
+    cmp al, byte [rsi + r9]     ; compare rsi + r9 to al
+    je match                    ; match? continue
+    jmp not_match               ; nope? get back to the first loop
 
   not_found:
     mov rax, 0

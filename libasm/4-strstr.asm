@@ -23,7 +23,7 @@ asm_strstr:
     cmp rdi, 0
     je not_found
     cmp byte [rdi], 0h
-    je not_found
+    je found
     cmp rsi, 0
     je not_found
     cmp byte [rsi], 0h

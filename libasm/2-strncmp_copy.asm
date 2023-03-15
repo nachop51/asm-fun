@@ -6,6 +6,8 @@ BITS 64
   ;
   ; int asm_strncmp(const char *s1, const char *s2, size_t n);
   ;
+  ; original strncmp
+  ;
   ; To return a value use, remember to use the rax register
 
   section .text

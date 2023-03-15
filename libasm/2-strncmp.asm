@@ -6,6 +6,8 @@ BITS 64
   ;
   ; int asm_strncmp(const char *s1, const char *s2, size_t n);
   ;
+  ; modified strncmp (instead of return char a - char b, returns -1, 0 or 1)
+  ;
   ; To return a value use, remember to use the rax register
 
   section .text

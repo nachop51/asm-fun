@@ -16,19 +16,22 @@ asm_strstr:
   push r10
 
   mov r8, 0     ; set first iterator to 0
+  mov r10, 0
 
   ; Check if the parameters are null
 
   null_checks:
+    mov al, byte [rdi]
+    cmp al, byte [rsi]
+    je found
     cmp rdi, 0
     je not_found
     cmp byte [rdi], 0h
-    je found
+    je not_found
     cmp rsi, 0
     je not_found
     cmp byte [rsi], 0h
     je found
-
 
   strstr:
     mov r10, r8   ; Last position of first iterator

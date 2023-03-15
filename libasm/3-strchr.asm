@@ -25,11 +25,11 @@ asm_strchr:
   strchr:
     mov r8b, byte [rdi]
 
-    cmp r8b, 0h ; check if the byte is 0
-    je not_found;
-
     cmp r8b, sil
     je found
+
+    cmp r8b, 0h ; check if the byte is 0
+    je not_found;
 
     inc r8
     inc rdi

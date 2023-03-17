@@ -16,7 +16,6 @@ asm_putc:
   mov rax, 1      ; The system call number for write is 1
   mov rdi, 1      ; stdout is file descriptor 1
   mov rdx, 1      ; We'll write just one byte at a time
-
   mov byte [rsi], r8b
   syscall
   jc failed       ; If the syscall failed set to 0 the ret value

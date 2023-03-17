@@ -22,11 +22,12 @@ asm_putc:
   jc failed       ; If the syscall failed set to 0 the ret value
 
   mov rax, 1
+  jmp end
 
   failed:
     mov rax, 0
-  end:
 
+  end:
     pop r8
 
     ; epilogue
